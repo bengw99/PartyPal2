@@ -15,6 +15,8 @@ public class Setup extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }
