@@ -10,6 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".GoHome"
+            android:label="@string/title_activity_go_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AddDrink"
+            android:label="@string/title_activity_add_drink"
+            android:parentActivityName=".Partying"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="partypal.partypal2.Partying" />
+        </activity>
+        <activity
+            android:name=".Partying"
+            android:label="@string/title_activity_partying"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Setup"
             android:label="@string/title_activity_setup"
             android:parentActivityName=".MainActivity"
