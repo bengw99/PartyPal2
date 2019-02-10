@@ -1,5 +1,6 @@
 package partypal.partypal2;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+
+import static android.provider.ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
 
 public class Setup extends AppCompatActivity {
     EditText weightvalue;
@@ -40,6 +44,7 @@ public class Setup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_setup);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,7 +126,6 @@ public class Setup extends AppCompatActivity {
 
     private void getcontact() {
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        System.out.println("456456nosepotatocheesekatendfjaslkdjflkasjdlkfjalsdjfl");
         startActivityForResult(intent, PICK_CONTACT);
     }
 
@@ -129,6 +133,21 @@ public class Setup extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Cursor cursor = getContentResolver().query(data.getData(),null, null, null, null);
+        while (cursor.moveToNext()) {
+            String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+            String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            String hasPhone = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+            if (Integer.parseInt(hasPhone) > 0) {
+                Cursor phones = getContentResolver().query(CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
+                while (phones.moveToNext()) {
+                    String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    System.out.println("Name: " + name + ", Phone Number: " + phoneNumber);
+                }
+                phones.close();
+            }
+        }
+        /*
         if (requestCode == PICK_CONTACT) {
             if (resultCode == AppCompatActivity.RESULT_OK) {
                 Uri contactData = data.getData();
@@ -136,9 +155,11 @@ public class Setup extends AppCompatActivity {
 
                 if (c.moveToFirst()) {
                     String name = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
-                    System.out.println(name + "nosepotatocheesekatendfjaslkdjflkasjdlkfjalsdjfl");
+                    System.out.println(name);
+                    //String cNumber = c.getString(c.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    // Toast.makeText(getApplicationContext(), cNumber, Toast.LENGTH_SHORT).show();
+                    System.out.println("\n\n\n\t" + cNumber + "\n\n\n");
                 }
-            }
-        }
+            }*/
     }
 }
