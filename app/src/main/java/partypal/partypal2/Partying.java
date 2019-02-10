@@ -37,7 +37,7 @@ public class Partying extends AppCompatActivity {
 
         postBAC(calculateBAC());
 
-        refreshbutton = (Button) findViewById(R.id.refreshButton);
+        //refreshbutton = (Button) findViewById(R.id.refreshButton);
         adddrinkbutton = (Button) findViewById(R.id.addDrinkButton);
         //gohomebutton = (Button) findViewById(R.id.goHomeEarlyButton);
         sendsmsbutton = (Button) findViewById(R.id.sendsmsbutton);
