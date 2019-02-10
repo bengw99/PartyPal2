@@ -25,12 +25,4 @@
         layout="@layout/content_setup" />
 
 
-    <TextView
-        android:id="@+id/contactnumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|center" />
-
 </android.support.design.widget.CoordinatorLayout>
