@@ -20,10 +20,23 @@ public class MainActivity extends AppCompatActivity {
                 gotoSetup();
             }
         });
+
+        Button party = (Button) findViewById(R.id.button3);
+        party.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoParty();
+            }
+        });
     }
 
     private void gotoSetup() {
         Intent intent = new Intent(this, Setup.class);
+        startActivity(intent);
+    }
+
+    private void gotoParty() {
+        Intent intent = new Intent(this, Partying.class);
         startActivity(intent);
     }
 }
