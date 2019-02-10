@@ -192,10 +192,32 @@
 
     <TextView
         android:id="@+id/contactname"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="315dp"
-        tools:layout_editor_absoluteY="234dp" />
+        android:layout_width="128dp"
+        android:layout_height="113dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="top"
+        android:text="Unassigned"
+        android:textColor="#111111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.412" />
+
+    <TextView
+        android:id="@+id/contactText"
+        android:layout_width="119dp"
+        android:layout_height="43dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:text="Contact:"
+        android:textColor="#111111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36" />
 
 </android.support.constraint.ConstraintLayout>
