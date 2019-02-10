@@ -4,8 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFDC00"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Partying"
     tools:showIn="@layout/activity_partying">
+
+    <TextView
+        android:id="@+id/bacText"
+        android:layout_width="154dp"
+        android:layout_height="149dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:text="BAC"
+        android:textColor="#111111"
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.207"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.055" />
+
+    <TextView
+        android:id="@+id/bacValue"
+        android:layout_width="191dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:text="0.00"
+        android:textColor="#111111"
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.055" />
+
+    <Button
+        android:id="@+id/addDrinkButton"
+        android:layout_width="220dp"
+        android:layout_height="84dp"
+        android:background="#39CCCC"
+        android:text="Add Drink"
+        android:textSize="22dp"
+        android:textColor="#111111"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="175dp" />
+
+    <Button
+        android:id="@+id/goHomeEarlyButton"
+        android:layout_width="220dp"
+        android:layout_height="84dp"
+        android:layout_marginBottom="16dp"
+        android:background="#39CCCC"
+        android:text="Go Home Early"
+        android:textSize="22dp"
+        android:textColor="#111111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
