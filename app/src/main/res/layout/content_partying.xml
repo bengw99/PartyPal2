@@ -72,53 +72,21 @@
         app:layout_constraintVertical_bias="0.335" />
 
     <Button
-        android:id="@+id/goHomeEarlyButton"
-        android:layout_width="220dp"
-        android:layout_height="84dp"
-        android:layout_marginBottom="16dp"
-        android:background="#F012BE"
-        android:fontFamily="@font/press_start_2p"
-        android:text="Go Home"
-        android:textColor="#111111"
-        android:textSize="22dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/refreshButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/ic_menu_rotate"
-        android:backgroundTint="@color/design_default_color_primary"
-        android:text="Refresh"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
         android:id="@+id/sendsmsbutton"
-        android:layout_width="123dp"
-        android:layout_height="54dp"
+        android:layout_width="221dp"
+        android:layout_height="82dp"
         android:background="#00ff00"
         android:fontFamily="@font/press_start_2p"
         android:text="Send SMS"
         android:textColor="#111111"
+        android:textSize="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.952" />
 
 </android.support.constraint.ConstraintLayout>

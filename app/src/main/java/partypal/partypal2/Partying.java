@@ -23,7 +23,7 @@ public class Partying extends AppCompatActivity {
     TextView bacvaluetext;
     Button refreshbutton;
     Button adddrinkbutton;
-    Button gohomebutton;
+    //Button gohomebutton;
     Button sendsmsbutton;
 
     @Override
@@ -39,7 +39,7 @@ public class Partying extends AppCompatActivity {
 
         refreshbutton = (Button) findViewById(R.id.refreshButton);
         adddrinkbutton = (Button) findViewById(R.id.addDrinkButton);
-        gohomebutton = (Button) findViewById(R.id.goHomeEarlyButton);
+        //gohomebutton = (Button) findViewById(R.id.goHomeEarlyButton);
         sendsmsbutton = (Button) findViewById(R.id.sendsmsbutton);
 
         refreshbutton.setOnClickListener(new View.OnClickListener() {
