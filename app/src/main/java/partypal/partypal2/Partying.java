@@ -112,7 +112,7 @@ public class Partying extends AppCompatActivity {
     private void sendsms(){
         SharedPreferences sharedPreferences = getSharedPreferences(Setup.SHARED_PREFS, MODE_PRIVATE);
         String address = sharedPreferences.getString(Setup.CONTACT_NUMBER, "0");
-        String message = "This is my test text";
+        String message = String.format("Hi! I am home safe and am going to go to bed. My BAC is %2.2f", calculateBAC());
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.getDefault().sendTextMessage(address, null, message, null,null);
     }
