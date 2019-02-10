@@ -45,8 +45,8 @@ public class Partying extends AppCompatActivity {
 
         blood_weight = .07 * user_weight * 453.592;
         elapsed_milliseconds = current_time - last_calculated_time;
-        if(sex) alcohol_weight = alcohol_weight - (14 * elapsed_milliseconds);
-        else alcohol_weight = alcohol_weight - (7 * elapsed_milliseconds);
+        if(sex) alcohol_weight = alcohol_weight - (14 * (elapsed_milliseconds/(360000)));
+        else alcohol_weight = alcohol_weight - (7 * (elapsed_milliseconds/(360000)));
         if(alcohol_weight < 0.0) alcohol_weight = 0.0;
         bac = alcohol_weight/blood_weight;
 
