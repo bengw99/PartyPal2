@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -16,6 +17,9 @@ import java.util.Set;
 public class Partying extends AppCompatActivity {
 
     TextView bacvaluetext;
+    Button refreshbutton;
+    Button adddrinkbutton;
+    Button gohomebutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,26 @@ public class Partying extends AppCompatActivity {
         bacvaluetext = (TextView) findViewById(R.id.bacValue);
 
         postBAC(calculateBAC());
+
+        refreshbutton = (Button) findViewById(R.id.refreshButton);
+        adddrinkbutton = (Button) findViewById(R.id.addDrinkButton);
+        gohomebutton = (Button) findViewById(R.id.goHomeEarlyButton);
+
+        refreshbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postBAC(calculateBAC());
+            }
+        });
+
+        adddrinkbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adddrink();
+                postBAC(calculateBAC());
+            }
+        });
+
     }
 
     private double calculateBAC() {
@@ -60,6 +84,16 @@ public class Partying extends AppCompatActivity {
 
     private void postBAC(double bacnum) {
         bacvaluetext.setText(Double.toString(bacnum));
+    }
+
+    private void adddrink () {
+        SharedPreferences sharedPreferences = getSharedPreferences(Setup.SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        double alcohol_weight = Double.parseDouble(sharedPreferences.getString(Setup.ALCOHOL_WEIGHT, "0"));
+        alcohol_weight += 14.0;
+        System.out.println(alcohol_weight);
+        editor.putString(Setup.ALCOHOL_WEIGHT, Double.toString(alcohol_weight));
+        editor.apply();
     }
 
 }

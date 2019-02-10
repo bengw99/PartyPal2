@@ -15,8 +15,10 @@ public class AddDrink extends AppCompatActivity {
         setContentView(R.layout.activity_add_drink);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
 
 }
