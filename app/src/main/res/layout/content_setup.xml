@@ -10,7 +10,7 @@
     tools:showIn="@layout/activity_setup">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/cocktailImage"
         android:layout_width="451dp"
         android:layout_height="611dp"
         android:layout_marginBottom="8dp"
