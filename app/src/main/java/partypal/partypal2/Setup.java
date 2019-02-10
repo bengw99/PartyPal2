@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 public class Setup extends AppCompatActivity {
@@ -34,6 +35,10 @@ public class Setup extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ImageView mainimg = (ImageView) findViewById(R.id.wineImage);  //HI TROY
+        int imageResource = getResources().getIdentifier("@drawable/wine", null, this.getPackageName());  //THIS TOO
+        mainimg.setImageResource(imageResource); //LEMONPARTY
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
