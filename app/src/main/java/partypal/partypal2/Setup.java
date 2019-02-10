@@ -1,9 +1,11 @@
 package partypal.partypal2;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -21,6 +23,18 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingApi;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
+import java.util.ArrayList;
+
 import static android.provider.ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
 
 public class Setup extends AppCompatActivity {
@@ -30,6 +44,81 @@ public class Setup extends AppCompatActivity {
     RadioButton femalebutton;
     Button selectcontactbutton;
     TextView contactnametext;
+
+    public static final String GEOFENCE_ID = "MyGeofenceId";
+    GoogleApiClient googleApiClient = null;
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        // probably something should go here (tutorial said so but it didn't work...)
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        googleApiClient.reconnect();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        //googleApiClient.reconnect(); (NOT FOLLOWING TUTORIAL)
+    }
+
+    private void startLocationMonitoring(){
+        try{
+            LocationRequest locationRequest = LocationRequest.create().setInterval(1000).setFastestInterval(5000).setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    System.out.println("location latitude: " + location.getLatitude() + ", location longitude:" + location.getLongitude());
+                }
+            });
+        } catch (SecurityException e){
+            // print out e.GetMessage()
+        }
+    }
+
+    private void startGeofenceMonitoring(){
+        try{
+            // WILL NEED TO SET LAT AND LONG ON LINE 92
+            Geofence geofence = new Geofence.Builder()
+                    .setRequestId(GEOFENCE_ID)
+                    .setCircularRegion(33, -84, 100)
+                    .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                    .setNotificationResponsiveness(1000)
+                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+                    .build();
+            GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
+                    .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_EXIT)
+                    .addGeofence(geofence)
+                    .build();
+            Intent intent = new Intent(this, GeofenceService.class);
+            PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            if(!googleApiClient.isConnected()){}
+            else{
+                LocationServices.GeofencingApi.addGeofences(googleApiClient, geofencingRequest, pendingIntent).setResultCallback(new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        if(status.isSuccess()) System.out.println("Successfully added geofence.");
+                        else System.out.println("Failed to add geofence.");
+                    }
+                });
+            }
+        } catch(SecurityException e){
+            // print out e.GetMessage()
+        }
+    }
+
+    private void endGeofenceMonitoring(){
+        System.out.println("stopMonitoring is called");
+        ArrayList<String> geoFenceIds = new ArrayList<String>();
+        geoFenceIds.add(GEOFENCE_ID);
+        LocationServices.GeofencingApi.removeGeofences(googleApiClient, geoFenceIds);
+    }
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String WEIGHT = "weight";
@@ -45,10 +134,21 @@ public class Setup extends AppCompatActivity {
     boolean sex;
     String contactname;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        googleApiClient = new GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+            @Override
+            public void onConnected(Bundle bundle) {
+
+            }
+
+            @Override
+            public void onConnectionSuspended(int i) {
+
+            }
+        }).build();
 
         setContentView(R.layout.activity_setup);
         Toolbar toolbar = findViewById(R.id.toolbar);

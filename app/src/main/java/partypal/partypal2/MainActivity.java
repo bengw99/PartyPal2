@@ -14,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     String [] PERMISSIONS = {
             Manifest.permission.READ_CONTACTS,
-            Manifest.permission.SEND_SMS
+            Manifest.permission.SEND_SMS,
+            Manifest.permission.ACCESS_FINE_LOCATION
     };
 
     @Override
