@@ -67,7 +67,7 @@ public class Partying extends AppCompatActivity {
         sex = sharedPreferences.getBoolean(Setup.SEX, false);
         alcohol_weight = Double.parseDouble(sharedPreferences.getString(Setup.ALCOHOL_WEIGHT, "0"));
 
-        blood_weight = .07 * user_weight * 453.592;
+        blood_weight = .07 * user_weight * 45.3592;
         elapsed_milliseconds = current_time - last_calculated_time;
         if(sex) alcohol_weight = alcohol_weight - (14 * (elapsed_milliseconds/(360000)));
         else alcohol_weight = alcohol_weight - (7 * (elapsed_milliseconds/(360000)));
@@ -83,7 +83,7 @@ public class Partying extends AppCompatActivity {
     }
 
     private void postBAC(double bacnum) {
-        bacvaluetext.setText(Double.toString(bacnum));
+        bacvaluetext.setText(Double.toString(bacnum).substring(0, 4));
     }
 
     private void adddrink () {
