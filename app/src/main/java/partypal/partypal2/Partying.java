@@ -83,7 +83,7 @@ public class Partying extends AppCompatActivity {
     }
 
     private void postBAC(double bacnum) {
-        bacvaluetext.setText(Double.toString(bacnum).substring(0, 4));
+        bacvaluetext.setText(Double.toString(bacnum+.005).concat("0000").substring(0, 4));
     }
 
     private void adddrink () {
