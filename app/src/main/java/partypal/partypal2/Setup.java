@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import static android.provider.ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
 
@@ -28,17 +29,21 @@ public class Setup extends AppCompatActivity {
     RadioButton malebutton;
     RadioButton femalebutton;
     Button selectcontactbutton;
+    TextView contactnametext;
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String WEIGHT = "weight";
     public static final String SEX = "sex";
     public static final String LAST_CALCULATED_TIME = "last_calculated_time";
     public static final String ALCOHOL_WEIGHT = "alcohol_weight";
+    public static final String CONTACT_NAME = "contact_name";
+    public static final String CONTACT_NUMBER = "contact_number";
 
     private final int PICK_CONTACT = 1;
 
     String weight;
     boolean sex;
+    String contactname;
 
 
     @Override
@@ -60,6 +65,8 @@ public class Setup extends AppCompatActivity {
         malebutton = (RadioButton) findViewById(R.id.maleButton);
         femalebutton = (RadioButton) findViewById(R.id.femaleButton);
         selectcontactbutton = (Button) findViewById(R.id.addcontactbutton);
+        contactnametext = (TextView) findViewById(R.id.contactname);
+
 
         weightbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +118,7 @@ public class Setup extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         weight = sharedPreferences.getString(WEIGHT, "0");
         sex = sharedPreferences.getBoolean(SEX, false);
+        contactname = sharedPreferences.getString(CONTACT_NAME, "NO CONTACT");
     }
 
     private void updateVisible() {
@@ -122,6 +130,8 @@ public class Setup extends AppCompatActivity {
             malebutton.setChecked(false);
             femalebutton.setChecked(true);
         }
+        contactnametext.setText(contactname);
+
     }
 
     private void getcontact() {
@@ -142,24 +152,17 @@ public class Setup extends AppCompatActivity {
                 Cursor phones = getContentResolver().query(CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
                 while (phones.moveToNext()) {
                     String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    System.out.println("Name: " + name + ", Phone Number: " + phoneNumber);
+                    //System.out.println("Name: " + name + ", Phone Number: " + phoneNumber);
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(CONTACT_NAME, name);
+                    editor.putString(CONTACT_NUMBER, phoneNumber);
+                    editor.apply(); //TODO load and update
+                    loadData();
+                    updateVisible();
                 }
                 phones.close();
             }
         }
-        /*
-        if (requestCode == PICK_CONTACT) {
-            if (resultCode == AppCompatActivity.RESULT_OK) {
-                Uri contactData = data.getData();
-                Cursor c = getContentResolver().query(contactData, null, null, null, null);
-
-                if (c.moveToFirst()) {
-                    String name = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
-                    System.out.println(name);
-                    //String cNumber = c.getString(c.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    // Toast.makeText(getApplicationContext(), cNumber, Toast.LENGTH_SHORT).show();
-                    System.out.println("\n\n\n\t" + cNumber + "\n\n\n");
-                }
-            }*/
     }
 }
