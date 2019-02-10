@@ -1,8 +1,13 @@
 package partypal.partypal2;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,12 +23,15 @@ public class Setup extends AppCompatActivity {
     Button weightbutton;
     RadioButton malebutton;
     RadioButton femalebutton;
+    Button selectcontactbutton;
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String WEIGHT = "weight";
     public static final String SEX = "sex";
     public static final String LAST_CALCULATED_TIME = "last_calculated_time";
     public static final String ALCOHOL_WEIGHT = "alcohol_weight";
+
+    private final int PICK_CONTACT = 1;
 
     String weight;
     boolean sex;
@@ -46,6 +54,7 @@ public class Setup extends AppCompatActivity {
         weightbutton = (Button) findViewById(R.id.weightButton);
         malebutton = (RadioButton) findViewById(R.id.maleButton);
         femalebutton = (RadioButton) findViewById(R.id.femaleButton);
+        selectcontactbutton = (Button) findViewById(R.id.addcontactbutton);
 
         weightbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +74,13 @@ public class Setup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveMale(false);
+            }
+        });
+
+        selectcontactbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getcontact();
             }
         });
 
@@ -103,4 +119,26 @@ public class Setup extends AppCompatActivity {
         }
     }
 
+    private void getcontact() {
+        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+        System.out.println("456456nosepotatocheesekatendfjaslkdjflkasjdlkfjalsdjfl");
+        startActivityForResult(intent, PICK_CONTACT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_CONTACT) {
+            if (resultCode == AppCompatActivity.RESULT_OK) {
+                Uri contactData = data.getData();
+                Cursor c = getContentResolver().query(contactData, null, null, null, null);
+
+                if (c.moveToFirst()) {
+                    String name = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
+                    System.out.println(name + "nosepotatocheesekatendfjaslkdjflkasjdlkfjalsdjfl");
+                }
+            }
+        }
+    }
 }
