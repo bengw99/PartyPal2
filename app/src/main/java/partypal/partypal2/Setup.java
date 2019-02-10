@@ -27,16 +27,12 @@ import android.widget.TextView;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingApi;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-
 import java.util.ArrayList;
 
 import static android.provider.ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
@@ -94,13 +90,13 @@ public class Setup extends AppCompatActivity {
             // WILL NEED TO SET LAT AND LONG ON LINE 92
             Geofence geofence = new Geofence.Builder()
                     .setRequestId(GEOFENCE_ID)
-                    .setCircularRegion(longitude, latitude, 20)
+                    .setCircularRegion(latitude, longitude, 10)
                     .setExpirationDuration(Geofence.NEVER_EXPIRE)
                     .setNotificationResponsiveness(1000)
-                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER|Geofence.GEOFENCE_TRANSITION_EXIT)
                     .build();
             GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
-                    .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_EXIT)
+                    .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_DWELL)
                     .addGeofence(geofence)
                     .build();
             Intent intent = new Intent(this, GeofenceService.class);

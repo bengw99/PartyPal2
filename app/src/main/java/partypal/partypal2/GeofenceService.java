@@ -16,6 +16,7 @@ public class GeofenceService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent){
+        //System.out.println("YOU MADE IT HERE");
         GeofencingEvent event = GeofencingEvent.fromIntent(intent);
         if(event.hasError()){}
         else {
@@ -25,7 +26,9 @@ public class GeofenceService extends IntentService {
             String requestId = geofence.getRequestId();
 
             if(transition == geofence.GEOFENCE_TRANSITION_ENTER){
-                //CALL MESSAGE FUNCTION HERE
+                System.out.println("REENTERING THE BATTLEFIELD");
+            } else if(transition == geofence.GEOFENCE_TRANSITION_EXIT){
+                System.out.println("LEAVING THE SANCTUARY");
             }
         }
     }
