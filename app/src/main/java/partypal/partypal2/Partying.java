@@ -1,14 +1,18 @@
 package partypal.partypal2;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import java.lang.Object;
 
 import org.w3c.dom.Text;
 
@@ -20,6 +24,7 @@ public class Partying extends AppCompatActivity {
     Button refreshbutton;
     Button adddrinkbutton;
     Button gohomebutton;
+    Button sendsmsbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,7 @@ public class Partying extends AppCompatActivity {
         refreshbutton = (Button) findViewById(R.id.refreshButton);
         adddrinkbutton = (Button) findViewById(R.id.addDrinkButton);
         gohomebutton = (Button) findViewById(R.id.goHomeEarlyButton);
+        sendsmsbutton = (Button) findViewById(R.id.sendsmsbutton);
 
         refreshbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +54,13 @@ public class Partying extends AppCompatActivity {
             public void onClick(View v) {
                 adddrink();
                 postBAC(calculateBAC());
+            }
+        });
+
+        sendsmsbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendsms();
             }
         });
 
@@ -96,4 +109,16 @@ public class Partying extends AppCompatActivity {
         editor.apply();
     }
 
+    private void sendsms(){
+        SharedPreferences sharedPreferences = getSharedPreferences(Setup.SHARED_PREFS, MODE_PRIVATE);
+        String address = sharedPreferences.getString(Setup.CONTACT_NUMBER, "0");
+        String message = "This is my test text";
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.getDefault().sendTextMessage(address, null, message, null,null);
+        //Intent i = new Intent(Intent.ACTION_VIEW);
+        //i.putExtra("address", sharedPreferences.getString(Setup.CONTACT_NUMBER, "0"));
+        //i.putExtra("sms_body", "This is my test text");
+        //i.setType("vnd.android-dir/mms-sms");
+        //startActivity(i);
+    }
 }
