@@ -21,7 +21,7 @@ import java.util.Set;
 public class Partying extends AppCompatActivity {
 
     TextView bacvaluetext;
-    Button refreshbutton;
+    //Button refreshbutton;
     Button adddrinkbutton;
     //Button gohomebutton;
     Button sendsmsbutton;
@@ -42,12 +42,12 @@ public class Partying extends AppCompatActivity {
         //gohomebutton = (Button) findViewById(R.id.goHomeEarlyButton);
         sendsmsbutton = (Button) findViewById(R.id.sendsmsbutton);
 
-        refreshbutton.setOnClickListener(new View.OnClickListener() {
+        /*refreshbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 postBAC(calculateBAC());
             }
-        });
+        });*/
 
         adddrinkbutton.setOnClickListener(new View.OnClickListener() {
             @Override
