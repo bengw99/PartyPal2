@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="71dp"
             tools:layout_editor_absoluteY="58dp"
-            tools:srcCompat="@drawable/wine" />
+            tools:srcCompat="@drawable/shot" />
 
         <RelativeLayout
             android:layout_width="341dp"
