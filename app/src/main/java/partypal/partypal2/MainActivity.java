@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageView mainimg = (ImageView) findViewById(R.id.imageView3);  //HI TROY
+        ImageView mainimg = (ImageView) findViewById(R.id.shotImage);  //HI TROY
         int imageResource = getResources().getIdentifier("@drawable/shot", null, this.getPackageName());  //THIS TOO
         mainimg.setImageResource(imageResource); //LEMONPARTY
 
