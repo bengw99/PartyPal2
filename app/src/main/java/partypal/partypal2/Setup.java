@@ -236,8 +236,8 @@ public class Setup extends AppCompatActivity {
 
     private void setloc() {
         startLocationMonitoring();
-        getDeviceLocation();
-        System.out.println("DADADADADADADA" + longitude + "latttttt: " + latitude);
+        Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        System.out.println("DADADADADADADA" + currentLocation.getLongitude() + "latttttt: " + currentLocation.getLatitude());
     }
 
     private void saveWeight() {
