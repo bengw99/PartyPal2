@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#6666ff"
+        android:background="#111111"
         tools:context=".MainActivity">
 
         <!-- The primary full-screen view. This can be replaced with whatever view
@@ -50,7 +50,7 @@
                 android:backgroundTint="@color/colorAccent"
                 android:elevation="?attr/dialogPreferredPadding"
                 android:text="Setup"
-                android:textColor="#800000"
+                android:textColor="#FFFFFF"
                 android:textSize="32dp"
                 android:textStyle="bold"
                 android:visibility="visible" />
@@ -75,7 +75,7 @@
                 android:elevation="?attr/dialogPreferredPadding"
                 android:fontFamily="sans-serif"
                 android:text="Let's Party"
-                android:textColor="#800000"
+                android:textColor="#FFFFFF"
                 android:textSize="32dp"
                 android:textStyle="bold"
                 android:visibility="visible" />
@@ -92,7 +92,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="PartyPal"
-            android:textColor="#800000"
+            android:textColor="#FFFFFF"
             android:textSize="68dp"
             android:textStyle="bold|italic"
             android:typeface="monospace" />
