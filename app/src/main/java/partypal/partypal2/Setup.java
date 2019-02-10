@@ -50,7 +50,6 @@ public class Setup extends AppCompatActivity {
     TextView contactnametext;
     Button setlocationbutton;
 
-    private FusedLocationProviderClient mFusedLocationProviderClient;
     double longitude;
     double latitude;
 
@@ -88,23 +87,6 @@ public class Setup extends AppCompatActivity {
         } catch (SecurityException e){
             // print out e.GetMessage()
         }
-    }
-
-    private void getDeviceLocation() {
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        try {
-            Task location = mFusedLocationProviderClient.getLastLocation();
-            location.addOnCompleteListener(new OnCompleteListener() {
-                @Override
-                public void onComplete(@NonNull Task task) {
-                    if (task.isSuccessful()) {
-                        Location curloc =  (Location) task.getResult();
-                        longitude = curloc.getLongitude();
-                        latitude = curloc.getLatitude();
-                    }
-                }
-            });
-        } catch (SecurityException e) {}
     }
 
     private void startGeofenceMonitoring(){
@@ -236,8 +218,13 @@ public class Setup extends AppCompatActivity {
 
     private void setloc() {
         startLocationMonitoring();
-        Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-        System.out.println("DADADADADADADA" + currentLocation.getLongitude() + "latttttt: " + currentLocation.getLatitude());
+        try {
+            Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            longitude = currentLocation.getLongitude();
+            latitude = currentLocation.getLatitude();
+            System.out.println("DADADADADADADA" + longitude + "latttttt: " + latitude);
+            startGeofenceMonitoring();
+        } catch (SecurityException e){}
     }
 
     private void saveWeight() {
