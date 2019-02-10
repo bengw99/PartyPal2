@@ -115,10 +115,5 @@ public class Partying extends AppCompatActivity {
         String message = "This is my test text";
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.getDefault().sendTextMessage(address, null, message, null,null);
-        //Intent i = new Intent(Intent.ACTION_VIEW);
-        //i.putExtra("address", sharedPreferences.getString(Setup.CONTACT_NUMBER, "0"));
-        //i.putExtra("sms_body", "This is my test text");
-        //i.setType("vnd.android-dir/mms-sms");
-        //startActivity(i);
     }
 }

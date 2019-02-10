@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityCompat.requestPermissions(this, PERMISSIONS, 1);
 
-
         setContentView(R.layout.activity_main);
         ImageView mainimg = (ImageView) findViewById(R.id.shotImage);  //HI TROY
         int imageResource = getResources().getIdentifier("@drawable/shot", null, this.getPackageName());  //THIS TOO
