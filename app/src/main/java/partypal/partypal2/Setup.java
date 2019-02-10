@@ -21,6 +21,8 @@ public class Setup extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String WEIGHT = "weight";
     public static final String SEX = "sex";
+    public static final String LAST_CALCULATED_TIME = "last_calculated_time";
+    public static final String ALCOHOL_WEIGHT = "alcohol_weight";
 
     String weight;
     boolean sex;
@@ -81,10 +83,8 @@ public class Setup extends AppCompatActivity {
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        String testeree = sharedPreferences.getString(WEIGHT, "932");
-        System.out.println("megamanmegaman   " + testeree + "    TESTETESTESTESTESTESTESTESTESTESTESTESTEST");
-        weight = testeree;
-        sex = sharedPreferences.getBoolean(SEX, true);
+        weight = sharedPreferences.getString(WEIGHT, "0");
+        sex = sharedPreferences.getBoolean(SEX, false);
     }
 
     private void updateVisible() {
