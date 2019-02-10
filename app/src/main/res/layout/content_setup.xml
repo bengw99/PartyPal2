@@ -20,6 +20,24 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/wine" />
 
+    <Button
+        android:id="@+id/addcontactbutton"
+        android:layout_width="126dp"
+        android:layout_height="205dp"
+        android:background="#993366"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Select Contact to be Notified When Home Safe"
+        android:textColor="#111111"
+        app:layout_anchor="@+id/include"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.751" />
+
     <TextView
         android:id="@+id/infoSection"
         android:layout_width="337dp"
@@ -141,23 +159,34 @@
 
     </RadioGroup>
 
-    <Button
-        android:id="@+id/addcontactbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#993366"
-        android:fontFamily="@font/press_start_2p"
-        android:text="Select Contact to be Notified When Home Safe"
-        android:textColor="#111111"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|center"
+    <TextView
+        android:id="@+id/label1"
+        android:layout_width="128dp"
+        android:layout_height="29dp"
+        android:background="#111111"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.468" />
+
+    <TextView
+        android:id="@+id/label2"
+        android:layout_width="122dp"
+        android:layout_height="37dp"
+        android:background="#111111"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.893" />
 
 </android.support.constraint.ConstraintLayout>
