@@ -47,6 +47,7 @@ public class Partying extends AppCompatActivity {
         elapsed_milliseconds = current_time - last_calculated_time;
         if(sex) alcohol_weight = alcohol_weight - (14 * elapsed_milliseconds);
         else alcohol_weight = alcohol_weight - (7 * elapsed_milliseconds);
+        if(alcohol_weight < 0.0) alcohol_weight = 0.0;
         bac = alcohol_weight/blood_weight;
 
         last_calculated_time = System.currentTimeMillis();
