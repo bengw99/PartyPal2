@@ -26,7 +26,8 @@ public class GeofenceService extends IntentService {
             String requestId = geofence.getRequestId();
 
             if(transition == geofence.GEOFENCE_TRANSITION_ENTER){
-                System.out.println("REENTERING THE BATTLEFIELD");
+                Partying p = new Partying();
+                p.sendsms();
             } else if(transition == geofence.GEOFENCE_TRANSITION_EXIT){
                 System.out.println("LEAVING THE SANCTUARY");
             }
