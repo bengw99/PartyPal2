@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,12 +27,15 @@ import android.widget.TextView;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingApi;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -44,6 +48,11 @@ public class Setup extends AppCompatActivity {
     RadioButton femalebutton;
     Button selectcontactbutton;
     TextView contactnametext;
+    Button setlocationbutton;
+
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    double longitude;
+    double latitude;
 
     public static final String GEOFENCE_ID = "MyGeofenceId";
     GoogleApiClient googleApiClient = null;
@@ -81,12 +90,29 @@ public class Setup extends AppCompatActivity {
         }
     }
 
+    private void getDeviceLocation() {
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        try {
+            Task location = mFusedLocationProviderClient.getLastLocation();
+            location.addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+                    if (task.isSuccessful()) {
+                        Location curloc =  (Location) task.getResult();
+                        longitude = curloc.getLongitude();
+                        latitude = curloc.getLatitude();
+                    }
+                }
+            });
+        } catch (SecurityException e) {}
+    }
+
     private void startGeofenceMonitoring(){
         try{
             // WILL NEED TO SET LAT AND LONG ON LINE 92
             Geofence geofence = new Geofence.Builder()
                     .setRequestId(GEOFENCE_ID)
-                    .setCircularRegion(33, -84, 100)
+                    .setCircularRegion(longitude, latitude, 20)
                     .setExpirationDuration(Geofence.NEVER_EXPIRE)
                     .setNotificationResponsiveness(1000)
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
@@ -166,6 +192,7 @@ public class Setup extends AppCompatActivity {
         femalebutton = (RadioButton) findViewById(R.id.femaleButton);
         selectcontactbutton = (Button) findViewById(R.id.addcontactbutton);
         contactnametext = (TextView) findViewById(R.id.contactname);
+        setlocationbutton = (Button) findViewById(R.id.setlocationbutton);
 
 
         weightbutton.setOnClickListener(new View.OnClickListener() {
@@ -196,8 +223,21 @@ public class Setup extends AppCompatActivity {
             }
         });
 
+        setlocationbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setloc();
+            }
+        });
+
         loadData();
         updateVisible();
+    }
+
+    private void setloc() {
+        startLocationMonitoring();
+        getDeviceLocation();
+        System.out.println("DADADADADADADA" + longitude + "latttttt: " + latitude);
     }
 
     private void saveWeight() {
