@@ -109,7 +109,7 @@ public class Partying extends AppCompatActivity {
         editor.apply();
     }
 
-    private void sendsms(){
+    public void sendsms(){
         SharedPreferences sharedPreferences = getSharedPreferences(Setup.SHARED_PREFS, MODE_PRIVATE);
         String address = sharedPreferences.getString(Setup.CONTACT_NUMBER, "0");
         String message = String.format("Hi! I am home safe and am going to go to bed. My BAC is %2.2f", calculateBAC());
