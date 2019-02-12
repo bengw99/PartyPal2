@@ -1,6 +1,7 @@
 package partypal.partypal2;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -265,27 +266,27 @@ public class Setup extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        //TODO update this next line so the app doesn't crash if a contact is not selected
-        Cursor cursor = getContentResolver().query(data.getData(),null, null, null, null);
-        while (cursor.moveToNext()) {
-            String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-            String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            String hasPhone = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-            if (Integer.parseInt(hasPhone) > 0) {
-                Cursor phones = getContentResolver().query(CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
-                while (phones.moveToNext()) {
-                    String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    //System.out.println("Name: " + name + ", Phone Number: " + phoneNumber);
-                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString(CONTACT_NAME, name);
-                    editor.putString(CONTACT_NUMBER, phoneNumber);
-                    editor.apply(); //TODO load and update
-                    loadData();
-                    updateVisible();
+        if(resultCode == Activity.RESULT_OK) {
+            Cursor cursor = getContentResolver().query(data.getData(), null, null, null, null);
+            while (cursor.moveToNext()) {
+                String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                String hasPhone = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+                if (Integer.parseInt(hasPhone) > 0) {
+                    Cursor phones = getContentResolver().query(CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
+                    while (phones.moveToNext()) {
+                        String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        //System.out.println("Name: " + name + ", Phone Number: " + phoneNumber);
+                        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString(CONTACT_NAME, name);
+                        editor.putString(CONTACT_NUMBER, phoneNumber);
+                        editor.apply(); //TODO load and update
+                        loadData();
+                        updateVisible();
+                    }
+                    phones.close();
                 }
-                phones.close();
             }
         }
     }
