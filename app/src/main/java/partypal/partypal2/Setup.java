@@ -266,6 +266,7 @@ public class Setup extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //TODO update this next line so the app doesn't crash if a contact is not selected
         Cursor cursor = getContentResolver().query(data.getData(),null, null, null, null);
         while (cursor.moveToNext()) {
             String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
