@@ -26,6 +26,19 @@ public class Partying extends AppCompatActivity {
     //Button gohomebutton;
     Button sendsmsbutton;
 
+    //TODO create ranges for BAC, color changes associated to each
+    //TODO suggest walking, getting a ride, or hospital for BAC ranges
+    //TODO emergency SMS to contact when BAC too high (should definitely be optional)
+    //TODO fix crashing on not choosing contact
+    //TODO allow multiple contacts
+    //TODO allow multiple geofences, selection between them
+    //TODO estimated walk time home, possible SMS if not there within 2x time
+    //TODO modify background images, make more professional
+    //TODO add relative layouts to fix position of buttons
+    //TODO force setup before partying is accessible
+    //TODO feedback when user sets location
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
