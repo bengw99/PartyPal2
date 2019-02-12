@@ -86,6 +86,8 @@ public class Setup extends AppCompatActivity {
         }
     }
 
+    //TODO if location is off, prevent crashing if location button is pressed
+    //TODO if locations services are denied, prevent crashing if location button is pressed
     private void startGeofenceMonitoring(){
         try{
             // WILL NEED TO SET LAT AND LONG ON LINE 92
