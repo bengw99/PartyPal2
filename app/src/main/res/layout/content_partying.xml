@@ -15,8 +15,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/beer" />
 
     <TextView
@@ -29,29 +31,63 @@
         android:textColor="#111111"
         android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.207"
+        app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.052" />
+
+    <TextView
+        android:id="@+id/countdownText"
+        android:layout_width="154dp"
+        android:layout_height="149dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:text="Countdown to BAC 0.00 in hours"
+        android:textColor="#111111"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.671" />
 
     <TextView
         android:id="@+id/bacValue"
         android:layout_width="191dp"
         android:layout_height="150dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="40dp"
         android:fontFamily="@font/press_start_2p"
         android:gravity="center"
         android:text="0.00"
         android:textColor="#111111"
         android:textSize="32dp"
-        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:id="@+id/timeToSober"
+        android:layout_width="191dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="36dp"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:text="0.00"
+        android:textColor="#111111"
+        android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.671" />
 
     <Button
         android:id="@+id/addDrinkButton"

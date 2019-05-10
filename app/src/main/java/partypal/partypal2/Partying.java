@@ -25,7 +25,9 @@ public class Partying extends AppCompatActivity {
     Button adddrinkbutton;
     //Button gohomebutton;
     Button sendsmsbutton;
+    TextView timetosobertext;
 
+    //TODO time until sober
     //TODO create ranges for BAC, color changes associated to each
     //TODO suggest walking, getting a ride, or hospital for BAC ranges
     //TODO emergency SMS to contact when BAC too high (should definitely be optional)
@@ -47,8 +49,10 @@ public class Partying extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         bacvaluetext = (TextView) findViewById(R.id.bacValue);
+        timetosobertext = (TextView) findViewById(R.id.timeToSober);
 
         postBAC(calculateBAC());
+        updateSoberTimer(calculateSoberTimer(calculateBAC()));
 
         //refreshbutton = (Button) findViewById(R.id.refreshButton);
         adddrinkbutton = (Button) findViewById(R.id.addDrinkButton);
@@ -65,8 +69,10 @@ public class Partying extends AppCompatActivity {
         adddrinkbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                double bac = calculateBAC();
                 adddrink();
-                postBAC(calculateBAC());
+                postBAC(bac);
+                updateSoberTimer(calculateSoberTimer(bac));
             }
         });
 
@@ -106,6 +112,28 @@ public class Partying extends AppCompatActivity {
         editor.apply();
 
         return bac;
+    }
+
+    private int calculateSoberTimer(double bac){
+        boolean sex;
+        int counter;
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Setup.SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        sex = sharedPreferences.getBoolean(Setup.SEX, false);
+
+        counter = 0;
+        while(bac>=0){
+            if(sex) bac -= .03;
+            else bac -= .015;
+            counter++;
+        }
+
+        return counter;
+    }
+
+    private void updateSoberTimer(int soberTimerNum){
+        timetosobertext.setText(Integer.toString(soberTimerNum));
     }
 
     private void postBAC(double bacnum) {
