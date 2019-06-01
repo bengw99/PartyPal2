@@ -13,9 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import java.lang.Object;
+import java.math.RoundingMode;
+import java.math.BigDecimal;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.Set;
 
 public class Partying extends AppCompatActivity {
@@ -114,7 +117,7 @@ public class Partying extends AppCompatActivity {
         return bac;
     }
 
-    private int calculateSoberTimer(double bac){
+    private String calculateSoberTimer(double bac){
         boolean sex;
         int counter;
 
@@ -122,18 +125,36 @@ public class Partying extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         sex = sharedPreferences.getBoolean(Setup.SEX, false);
 
-        counter = 0;
-        while(bac>=0){
-            if(sex) bac -= .03;
-            else bac -= .015;
-            counter++;
-        }
+        DecimalFormat df = new DecimalFormat("#.###");
+        df.setRoundingMode(RoundingMode.CEILING);
+        bac = Double.valueOf(df.format(bac));
 
-        return counter;
+        counter = 0;
+        while(bac > 0.00){
+            bac = Double.valueOf(df.format(bac));
+            System.out.println("\nLooping Again: current bac is " + bac);
+            if(bac < 0.0000) break;
+            if(sex){
+                bac -= .03;
+                counter++;
+                System.out.println("\n\t1: BAC: " + bac + " COUNTER: " + counter + " COUNTER % 2: " + counter % 2);
+            }
+            else if(!sex){
+                bac -= .015;
+                counter++;
+                System.out.println("\n\t2: BAC: " + bac + " COUNTER: " + counter + " COUNTER % 2: " + counter % 2);
+            }
+            else if(counter == 0){
+                counter++;
+                System.out.println("\n\t3: BAC: " + bac + " COUNTER: " + counter + " COUNTER % 2: " + counter % 2);
+                break;
+            }
+        }
+        return (Integer.toString(counter) + ".0");
     }
 
-    private void updateSoberTimer(int soberTimerNum){
-        timetosobertext.setText(Integer.toString(soberTimerNum));
+    private void updateSoberTimer(String soberTimerNum){
+        timetosobertext.setText(soberTimerNum);
     }
 
     private void postBAC(double bacnum) {
